@@ -26,4 +26,3 @@ tzdata==2023.3
 urllib3==2.0.4
 virtualenv==20.25.0
 virtualenvwrapper-win==1.2.7
-windows-curses==2.3.1
