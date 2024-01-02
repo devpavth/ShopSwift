@@ -1,0 +1,112 @@
+
+{% load static %}
+
+{% block content %}
+
+    <style>
+        body {
+            margin-bottom: 0px; /* Add margin to accommodate the fixed footer */
+        }
+
+        .footer {
+            background-color: #343a40; /* Footer background color */
+            color: #ffffff; /* Text color */
+            padding: 20px 20px; /* Padding at the top and bottom */
+            /* position: fixed; Fixed position at the bottom of the page */
+            width: 100%; /* Full width */
+            bottom: 0; /* Stick it at the bottom */
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none; /* Link color in the footer */
+        }
+
+        .footer a:hover{
+            color: #fff;
+            text-decoration:underline; /* Link color in the footer */
+        }
+
+        .footer h5{
+            color: #fff; 
+        }
+
+        /* .contact-us{
+            margin-left: 25rem;
+            margin-right: -20rem;
+        }
+
+        .quick-links{
+            margin-left: 11rem;
+            margin-right: -15rem;
+        }
+
+        .connect-with-us{
+            margin-right: -15rem;
+        }
+
+        .make-money-with-us{
+            margin-right: -15rem;
+        } */
+        
+    </style>
+    </head>
+    <body>
+
+    <!-- page content goes here -->
+
+    <div class="footer">
+        <div class="container-fluid">
+            <div class="row gx-1">
+                <!-- Contact Us -->
+                <div class="col-sm-6 col-md-3 p-3 contact-us">
+                    <h5>Contact Us</h5>
+                    <p>Email: <a href="mailto:support@example.com">support@example.com</a></p>
+                    <p>Phone: +91 1234567890</p>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="col-sm-6 col-md-3 p-3 quick-links">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Connect with us -->
+                <div class="col-sm-6 col-md-3 p-3 connect-with-us">
+                    <h5>Connect with us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Make Money with Us -->
+                <div class="col-sm-6 col-md-3 p-3 make-money-with-us">
+                    <h5>Make Money with Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Protect and Build Your Brand</a></li>
+                        <li><a href="#">Sell on ShopSwift</a></li>
+                        <li><a href="#">Advertise Your Products</a></li>
+                        <li><a href="#">Become an Affiliate</a></li>
+                        <li><a href="#">Fulfillment by ShopSwift</a></li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Copyright -->
+            <div class="text-center p-2">
+                <small>&copy; 1993-2023, ShopSwift.in</small>
+            </div>
+        </div>
+    </div>
+    
+
+{% endblock content %}

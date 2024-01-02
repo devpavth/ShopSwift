@@ -1,0 +1,79 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+    <h3 class="mt-5">Shopping Cart</h3> 
+    <div class="row mt-3 cart-bottom">
+        <div class="col-lg-9 mb-3">
+            <div class="box-element" id="cart-info">
+                <div class="cart-row">
+                    <div style="flex:2"><strong></strong></div>
+                    <div style="flex:2"><strong>Item</strong></div>
+                    <div style="flex:1"><strong>Price</strong></div>
+                    <div style="flex:1"><strong>Quantity</strong></div>
+                    <div style="flex:1"><strong>Total</strong></div>
+                </div>
+
+
+                {% for item in items %}
+                <div class="cart-row">
+                    <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}" alt=""></div>
+                    <div style="flex:2; color: #247685; font-weight: 600;"><p>{{item.product.name}}</p></div>
+                    <div style="flex:1"><p>&#8377;{{item.product.price|floatformat:2}}</p></div>
+                    <div style="flex:1">
+                        <p class="quantity">{{item.quantity}}</p>
+                        <div class="quantity">
+                            <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static 'images/arrow-up.png' %}" alt="">
+                            <img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static 'images/arrow-down.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div style="flex:1"><p>&#8377;{{item.get_total|floatformat:2}}</p></div>
+                </div>
+                {% endfor %}
+            </div>
+            
+
+            <div class="box-element hidden" id="empty-cart-info">
+                <h3 class="mt-2 ms-3">Your Cart is empty.</h3>
+                <a class="btn btn-dark btn-sm ms-3 mb-3" href="{% url 'store' %}">&#x2190; Go Back</a>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+                <br>
+                <br>
+                <div class="tick-icon">
+                    <h6 class="ms-4">Your order is eligible for FREE Delivery.</h6>
+                    <p class="ms-4">Select this option at checkout. <span style="color: #247685;">Details</span></p>
+                </div>
+                <div class="subtotal-side mt-4 ms-1">
+                    <h5>Subtotal ({{order.get_cart_items}} items): <strong>&#8377;{{order.get_cart_total|floatformat:2}}</strong></h5>
+                    <hr>
+                    <a class="btn btn-primary btn-block my-2" href="{% url 'checkout' %}" {% if not order.get_cart_items %} onclick="return false;" style="opacity: 0.4; cursor: default;" {% else %} onclick="return true;" {% endif %}>Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        var empty_cart = '{{order.get_cart_items}}'
+        if(empty_cart == 0){
+            document.getElementById('cart-info').classList.add("hidden");
+            document.getElementById('empty-cart-info').classList.remove("hidden");
+        }
+
+    </script>
+
+    <style>
+
+        .cart-bottom{
+            margin-bottom: 22rem;
+        }
+
+    </style>
+
+
+{% endblock content %}

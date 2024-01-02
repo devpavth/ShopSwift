@@ -1,0 +1,75 @@
+{% load static %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Thanks for your order!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <style>
+        h3{
+            color: hsl(0, 0%, 30%);
+            /* margin: auto; */
+            padding-top: 40px;
+        }
+        .tick-icon {
+            position: relative;
+        }
+
+        .tick-icon::after{
+            --size: 6rem;
+            content: '\2713';
+            position: absolute;
+            top: 50%;
+            left: 2px;
+            transform: translateY(-50%);
+            text-align: center;
+            border-radius: 50%;
+            background-color: #4f868c;
+            font-size: var(--size);
+            --dimension: calc(1.5 * var(--size));
+            width: var(--dimension);
+            height: var(--dimension);
+            color: #fff;
+            margin-left: 30rem;
+        }
+        body {
+            padding-top: 90px; /* Add some top padding to give space for the fixed navbar if present */
+        }
+
+        .success-message {
+            background-color: #d4edda; /* Bootstrap success alert background color */
+            color: #155724; /* Bootstrap success alert text color */
+            padding: 28px;
+            margin-bottom: 20px; /* Add some bottom margin for spacing */
+            border: 1px solid #c3e6cb; /* Bootstrap success alert border color */
+            border-radius: 6px; /* Bootstrap success alert border radius */
+        }
+    </style>
+
+    </head>
+    <body>
+    <section>
+        <div class="container">
+            <div class="success-message">
+                <div class="tick-icon ms-4"></div>
+                <h3 class="text-center lh-base mt-5">
+                    Thank you for choosing us! Your Payment was Successful. Your satisfaction is our priority. Should you
+                    need assistance or have inquiries, feel free to reach out to our
+                    customer support at <a href="mailto:support@example.com">support@example.com</a>.
+                </h3>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+    </html>
+
+    
+
+{% endblock content %}

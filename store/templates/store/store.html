@@ -1,0 +1,67 @@
+{% extends 'store/main.html' %}
+{% load static %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"> -->
+
+{% block content %}
+    <div id="myCarousel" class="carousel carousel-dark slide mt-3" data-bs-ride="carousel">
+        <!-- <img class="img-fluid d-block" src="{% static 'images/bg-shopping-img.jpg' %}" alt=""> -->
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/iphone.png' %}" alt="" class="img-fluid d-block">
+                <div class="carousel-caption">
+                    <h6>Apple iPhone 15 Pro Max (256GB)</h6>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/watch.png' %}" alt="" class="img-fluid d-block">
+                <div class="carousel-caption">
+                    <h6>Apple Watch Series 9</h6>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/sony-headphone_1zCCR3L.png' %}" alt="" class="img-fluid d-block">
+                <div class="carousel-caption">
+                    <h6>Sony PlayStation 3d Gaming Wireless Headphone</h6>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev" >
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+    
+
+    <h3 class="mt-2">Latest Products</h3>
+    <div class="row mt-3 mb-5">
+        {% for product in products %}
+        <div class="col-lg-4 mb-3">
+            <img class="thumbnail" src="{{product.imageURL}}" alt="">
+            <div class="box-element product">
+                <a href="{% url 'product_details' product_id=product.id %}"><strong>{{product.name}}</strong></a>
+                <br>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star-o" style="color: orange;"></span>
+                <hr>
+                <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-dark add-btn update-cart">Add to Cart</button>
+                <a href="{% url 'product_details' product_id=product.id %}" class="btn btn-outline-success">View</a>
+                <h4 style="display: inline-block;" class="float-end">&#8377;{{product.price|floatformat:2}}</h4>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+{% endblock content %}
+

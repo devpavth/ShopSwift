@@ -1,0 +1,138 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+    <a class="btn btn-dark btn-sm mt-4 mb-3" href="{% url 'store' %}">&#x2190; Go Back</a>
+    <div class="row mt-3">
+        <div class="col-lg-5">
+            <div class="box-element">
+                <img class="detail-thumbail" src="{{product.imageURL}}" alt="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="box-element">
+                <h3 class="mt-2 ms-2">{{product.name}}</h3>
+                <hr>
+                <span class="fa fa-star checked ms-2"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star-o" style="color: orange;"></span>
+                <span>4.1 reviews</span>
+                <hr>
+                <p class="ms-2"><strong>Price:</strong> &#8377;{{product.price|floatformat:2}}</p>
+                <hr>
+                <p class="ms-2"><strong>Description:</strong> {{product.description}}</p>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="box-element">
+                <p class="mt-2 mx-2">Price: <strong class="float-end">&#8377;{{product.price|floatformat:2}}</strong></p>
+                <hr>
+                {% if product.status == 'in_stock' %}
+                    <p class="mx-2">Status: <span class="float-end">In Stock</span></p>
+                {% elif product.status == 'out_of_stock' %}
+                    <p class="mx-2">Status: <span class="float-end">Out of Stock</span></p>
+                {% endif %}
+                <!-- <hr> -->
+                
+                <!-- <div class="mb-3 mx-2">
+                    <label for="" class="form-label">Qty:</label>
+                    <p class="quantity qty">{{ order.get_cart_items }}</p>
+                    <div class="quantity qty">
+                        <img data-product="{{product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static 'images/arrow-up.png' %}" alt="">
+                        <img data-product="{{product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static 'images/arrow-down.png' %}" alt="">
+                    </div>
+                </div> -->
+               
+                <hr>
+                <a data-product="{{product.id}}" data-action="add" class="btn btn-primary btn-block update-cart" href="#" style="width: 100%; border-radius: 20px; font-weight: 600;">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-4">Top reviews from India </h4>
+    <div class="row mt-3 mb-5">
+
+        <div class="col-lg-9 mb-3">
+            <div class="box-element review-side">
+                <!-- Display existing reviews -->
+                {% for review in reviews %}
+                <!-- Display each review here -->
+                <p class="mx-2 mt-2" style="text-transform: capitalize;"><img src="{% static 'images/user.png' %}" alt=""> {{ review.user.username }}</p>
+                <span class="fa fa-star checked ms-2"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star-o" style="color: orange;"></span>
+                <span>{{ review.rating }} reviews </span>  
+                <p class="mx-2">Reviewed in India on {{ review.timestamp|date:"F j, Y H:i" }}</p>
+                <p class="mx-2" >{{ review.comment }}</p>
+                <hr>
+                {% endfor %}
+ 
+                {% if user.is_authenticated %}
+                    <!-- Display the review form when the user is logged in -->
+                    <form method="post" action="{% url 'review-page' product.id %}">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <h5 class="mx-2">Review this product</h5>
+                        <small class="mx-2">Share your thoughts with other customers</small>
+                        <p><button class="btn btn-primary w-25 my-3 mx-2" type="submit">Write a product review</button></p>
+                    </form>
+                {% else %}
+                    <!-- Display a message prompting the user to log in -->
+                    <h5>Review this product</h5>
+                    <small>Share your thoughts with other customers</small>
+                    <p class="review-text mt-3">Please <a href="{% url 'login' %}" style="color: white;">login</a> to write a product review.</p>
+                {% endif %}
+    
+            </div>
+        </div>
+
+        <!-- <p>Debugging Output: {{ some_debug_variable }}</p> -->
+    </div>
+
+    <style>
+        .review-text{
+            background-color: #0275d8;
+            color: white;
+            padding: 7px;
+            border-radius: 6px;
+        }
+
+        .review-side img{
+            width: 25px;
+            height: 25px;
+            margin-right: 4px;
+            margin-top: -2px;
+        }
+    </style>
+
+    <!-- <script>
+        function addToCartAndNavigate(event) {
+            // Prevent the default action (following the link immediately)
+            event.preventDefault();
+
+            // Get the URL from the href attribute
+            var url = event.target.getAttribute('href');
+
+            // Perform asynchronous cart update (replace this with your actual cart update logic)
+            updateCartAsync(event.target.getAttribute('data-product'), function () {
+                // After cart update is complete, navigate to the specified URL
+                window.location.href = url;
+            });
+        }
+
+            // Replace this function with your actual cart update logic
+        function updateCartAsync(productId, callback) {
+            // Simulate an asynchronous operation (replace this with your actual logic)
+            setTimeout(function () {
+            console.log('Cart updated for product ID: ' + productId);
+                // Call the callback function to proceed with the navigation
+            callback();
+            }, 1000); // Simulating a 1-second delay, adjust as needed
+        }
+    </script> -->
+
+{% endblock content %}

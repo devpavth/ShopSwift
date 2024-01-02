@@ -1,0 +1,138 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    
+<head>
+    {% block content %}
+	<title>Login</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+
+	<style>
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background: hsl(0, 0%, 98%);
+		}
+		.user_card {
+			width: 450px;
+			margin-top: 60px;
+			margin-bottom: auto;
+			/* background: #74cfbf;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column; */
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 8px;
+		}
+
+		.form_container {
+			margin-top: 20px;
+		}
+
+		#form-title{
+			color: black;
+			
+		}
+        .form_container form label{
+            font-weight: 600;
+        }
+
+		.login_btn {
+			width: 100%;
+			background: #247685;
+			color: white !important;
+            border-radius: 20px;
+		}
+		.login_btn:hover {
+			background: #247685;
+            opacity: .9;
+		}
+		.login_container input{
+			font-weight: 600;
+		}
+	
+
+		#messages{
+			background-color: green;
+			color: #fff;
+			padding: 10px;
+			margin-top: 10px;
+            border-radius: 0px;
+		}
+
+        .heading{ 
+            display: flex;
+            justify-content: center;
+            color: #247685;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .container a{
+            text-align: center;
+            text-decoration: none;
+        }
+
+		.container a:hover{
+            color: #247685;
+        }
+
+	</style>
+
+</head>
+<body>
+	<div class="container h-100">
+        <a href="{% url 'store' %}" class="heading mt-4">ShopSwift</a>
+		<div class="d-flex justify-content-center">
+			<div class="user_card mt-4">
+				<div class="mx-3 mt-2">
+                    <h3 id="form-title">LOGIN</h3>
+				</div>
+				<div class="mx-3 form_container">
+					<form method="POST" action="">
+                        {% csrf_token %}
+						<div class="mb-3">
+							<label for="" class="form-label">Username</label>
+							<input type="text" name="username" placeholder="Username..." class="form-control">
+						</div>
+						<div class=" mb-2">
+							<label for="" class="form-label">Password</label>
+							<input type="password" name="password" placeholder="Password..." class="form-control" >
+						</div>
+
+							<div class="d-flex justify-content-center mt-3 login_container">
+				 				<input class="btn btn-primary login_btn" type="submit" value="Login">
+				   			</div>
+					</form>
+				</div>
+
+                {% for message in messages %}
+                    <p id="messages">{{message}}</p>
+                {% endfor %}
+
+                {{form.errors}}
+		
+				<div class="mt-4">
+					<div class="d-flex justify-content-center links mb-4">
+						New to ShopSwift? <a href="{% url 'register' %}" class="ml-2">Create an Account</a>
+					</div>
+			
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <!-- Display review form if the user is authenticated -->
+        <a href="{% url 'product_details' product_id=product.id %}" class="btn btn-dark btn-sm mt-4 mb-3">&#x2190; Go Back</a>
+        <h2>Write a Product Review</h2>
+        <div class="row mt-3 review-bottom">
+            <div class="col-lg-9 mb-3">
+                <div class="box-element re-image">
+                    <!-- <p class="mx-2 mt-2" style="text-transform: capitalize;"><img src="{% static 'images/user.png' %}" alt=""> {{ review.user.username }}</p> -->
+                    <form method="post" action="{% url 'review-page' product_id=product.id %}">
+                        {% csrf_token %}
+                        <!-- Your review form fields here -->
+                        <div>
+                            <label for="id_rating" class="mx-2 my-3">Rating:</label>
+                            <input type="number" name="rating" id="id_rating" required min="1" max="5">
+                        </div>
+                        <!-- <p class="mx-2">Reviewed in India on {{ review.timestamp|date:"F j, Y H:i" }}</p> -->
+                        <div>
+                            <label for="id_comment" class="mx-2 my-2">Comment:</label>
+                            <textarea name="comment" id="id_comment" class="w-100 ms-2" required></textarea>
+                        </div>
+                        <button class="btn btn-primary w-25 my-3 mx-2" type="submit">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="box-element">
+                    <img class="review-thumbail" src="{{product.imageURL}}" alt="">
+                    <p class="mx-2">Price: <strong>&#8377;{{product.price|floatformat:2}}</strong></p>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <!-- Display login anchor tag if the user is not authenticated -->
+        <p>Please <a href="{% url 'login' %}">login</a> to write a review.</p>
+    {% endif %}
+
+    <style>
+        .re-image img{
+            width: 25px;
+            height: 25px;
+            margin-right: 4px;
+            margin-top: -2px;
+        }
+        #id_rating{
+            width: 75px;
+        }
+        #id_comment{
+            height: 125px;
+        }
+        .review-thumbail{
+            width: 100%;
+            height: 250px;
+        }
+        .review-bottom{
+            margin-bottom: 15rem;
+        }
+    </style>
+
+{% endblock content %}
