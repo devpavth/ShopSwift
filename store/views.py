@@ -44,7 +44,7 @@ def cart(request):
 def checkout(request):
     if request.method == 'POST':
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        YOUR_DOMAIN = 'http://127.0.0.1:8000'
+        YOUR_DOMAIN = ''https://shopswift-tbzv.onrender.com''
 
         cart_info = cartData(request)
         order = cart_info['order']
