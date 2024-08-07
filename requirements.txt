@@ -2,7 +2,7 @@ asgiref==3.7.2
 certifi==2023.7.22
 charset-normalizer==3.2.0
 distlib==0.3.8
-Django==5.0
+Django==5.0.8
 django-braces==1.15.0
 django-model-utils==4.3.1
 django-paypal==2.0
