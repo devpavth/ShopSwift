@@ -11,7 +11,7 @@ filelock==3.13.1
 gunicorn==22.0.0
 idna==3.4
 packaging==23.2
-Pillow==10.1.0
+Pillow==10.3.0
 platformdirs==4.1.0
 pygame==2.5.0
 python-decouple==3.8
